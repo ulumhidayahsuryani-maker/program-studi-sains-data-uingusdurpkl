@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Program Studi Sains Data - UIN K.H. Abdurrahman Wahid Pekalongan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #1a237e;
+            --secondary: #283593;
+            --accent: #ff9800;
+            --light: #f5f5f5;
+            --dark: #333;
+            --text: #444;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+            object-fit: contain;
+        }
+
+        .logo-text h1 {
+            font-size: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .logo-text .subtitle {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            color: var(--accent);
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu li {
+            margin: 0 10px;
+            position: relative;
+        }
+
+        .nav-menu li a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: background 0.3s;
+            font-weight: 500;
+            display: block;
+        }
+
+        .nav-menu li a:hover, .nav-menu li a.active {
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* Dropdown Menu */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--secondary);
+            min-width: 200px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border-radius: 5px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .dropdown-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu li {
+            margin: 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .dropdown-menu li:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-menu li a {
+            padding: 12px 15px;
+            white-space: nowrap;
+        }
+
+        .dropdown-menu li a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+            background: none;
+            border: none;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        /* Main Content */
+        main {
+            padding: 2rem 0;
+            min-height: calc(100vh - 200px);
+        }
+
+        /* Page Styles */
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(26, 35, 126, 0.8), rgba(40, 53, 147, 0.9)), url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3') center/cover;
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero .tagline {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 500;
+            color: var(--accent);
+        }
+
+        /* Section Styles */
+        .section {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+        }
+
+        .section h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+
+        .section h3 {
+            color: var(--secondary);
+            margin: 1.5rem 0 1rem;
+        }
+
+        /* Text Alignment */
+        .text-justify {
+            text-align: justify;
+        }
+
+        /* Contact Info Styles */
+        .contact-info {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .contact-item {
+            flex: 1;
+            min-width: 200px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-item i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .contact-item h3 {
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        .contact-item a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+
+        /* Two Column Layout */
+        .two-column-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .info-column {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .info-column h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+
+        .academic-list {
+            list-style: none;
+        }
+
+        .academic-list li {
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border-left: 4px solid var(--accent);
+            transition: transform 0.2s;
+        }
+
+        .academic-list li:hover {
+            transform: translateX(5px);
+            background: #e9ecef;
+        }
+
+        .academic-list strong {
+            color: var(--secondary);
+        }
+
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .team-member {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--light);
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+        }
+
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--accent);
+            margin: 0 auto 1rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5rem;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #ddd;
+            background: var(--light);
+            border-radius: 8px 8px 0 0;
+            overflow: hidden;
+        }
+
+        .tab {
+            padding: 12px 25px;
+            cursor: pointer;
+            background: #e0e0e0;
+            border: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            flex: 1;
+            text-align: center;
+        }
+
+        .tab:hover {
+            background: #d0d0d0;
+        }
+
+        .tab.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Table Styles */
+        .table-container {
+            overflow-x: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: white;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+
+        /* Search Box */
+        .search-box {
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .social-links {
+            margin: 1rem 0;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Media Queries untuk Tablet dan Mobile */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                margin-bottom: 1rem;
+                width: 100%;
+                justify-content: center;
+            }
+            
+            nav {
+                width: 100%;
+                justify-content: space-between;
+                position: relative;
+            }
+            
+            .hamburger {
+                display: flex;
+            }
+            
+            .nav-menu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                background: var(--secondary);
+                box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+                display: none;
+                z-index: 1000;
+            }
+            
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .nav-menu li {
+                margin: 0;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+            
+            .nav-menu li:last-child {
+                border-bottom: none;
+            }
+            
+            .nav-menu li a {
+                padding: 15px;
+                text-align: center;
+            }
+            
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                background: rgba(0,0,0,0.1);
+                display: none;
+            }
+            
+            .dropdown-menu.active {
+                display: block;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            th, td {
+                padding: 8px 10px;
+                font-size: 0.9rem;
+            }
+
+            .contact-info {
+                flex-direction: column;
+            }
+
+            .contact-item {
+                min-width: 100%;
+            }
+
+            .two-column-layout {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+
+        /* Media Queries untuk Desktop */
+        @media (min-width: 769px) {
+            .nav-menu {
+                display: flex !important;
+            }
+            
+            .nav-menu li:hover .dropdown-menu {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <img src="logo_uin.jpg" alt="Logo UIN" class="logo-img">
+                <div class="logo-text">
+                    <h1>Program Studi Sains Data</h1>
+                    <div class="subtitle">UIN KH Abdurrahman Wahid Pekalongan</div>
+                </div>
+            </div>
+            <nav>
+                <button class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#" class="nav-link active" data-page="home">Beranda</a></li>
+                    <li><a href="#" class="nav-link" data-page="students">Data Mahasiswa</a></li>
+                    <li><a href="#" class="nav-link" data-page="dosen">Pengabdian Dosen</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="nav-link" id="infoDropdown">Informasi <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu" id="infoDropdownMenu">
+                            <li><a href="#" class="nav-link" data-page="info-prodi">Informasi Program Studi</a></li>
+                            <li><a href="#" class="nav-link" data-page="info-kegiatan">Kegiatan Mahasiswa</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Home Page -->
+        <section id="home" class="page active">
+            <div class="hero">
+                <h2>Program Studi Sains Data</h2>
+                <p class="tagline">Menghadirkan Generasi Pertama Data Scientists 2024-2025</p>
+            </div>
+
+            <div class="section">
+                <h2>Tentang Sains Data</h2>
+                <div class="text-justify">
+                    <p>Program Studi Sains Data merupakan program sarjana di UIN K.H. Abdurrahman Wahid Pekalongan. Berdiri berdasarkan Keputusan Menteri Pendidikan, kebudayaan, riset dan teknologi Republik Indonesia nomor 405/E/05/2023 pada tanggal 2 Mei 2023.</p>
+                    <p>Saat ini, program studi sains data menjadi bagian dari Fakultas Ekonomi dan Bisnis Islam. Keunikan program studi sains data terletak pada pengembangan kemampuan mengestrak wawasan dari data terstruktur dan tidak struktur dengan penekanan khusus pada nilai-nilai religius.</p>
+                    <p>Melalui kombinasi pembelajaran praktik dan spiritual, program studi ini bertujuan untuk memberikan dasar yang kuat dalam ilmu pengetahuan, praktik, dan spiritual, sehingga lulusannya tidak hanya unggul secara akademik tetapi juga memiliki integritas moral yang tinggi.</p>
+                    <p>Visi harmonisasi ilmu UIN K.H, Abdurrahman Wahid Pekalongan tercermin dalam upaya untuk mencetak lulusan yang soleh, cerdas, unggul dan moderat yang mampu berkontribusi secara positif dalam masyarakat dan dunia kerja semakin terdigitalisasi.</p>
+
+                    <h3>Visi Program Studi</h3>
+                    <p>Visi keilmuan program studi Sains Data "Menjadi Program Studi yang unggul dalam sains data dan berorientasi pada Big Data dan Era Digital untuk kemanusiaan berlandaskan budaya bangsa".</p>
+                    <p>Program Studi Sains Data dipimpin oleh:</p> 
+                    <p>Ketua Program Studi: Ibu Umi Mahmudah, M.Sc., Ph.D</p>
+                    
+                    <h3>Profil Lulusan Program Studi Sains Data:</h3>
+                    <p>1. Akademisi</p>
+                    <p>2. Analisa Data</p>
+                    <p>3. Ilmuwan Data</p>
+                    <p>4. Pengetahuan Intellegen Sistem</p>
+                    <p>5. Technopreneur</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Tim Pengembang Website</h2>
+                <div class="team-grid">
+                   <div class="team-member">
+    <img src="foto1.jpg" alt="Ulum Hidayah Suryani" class="profile-img">
+    <h3>Ulum Hidayah Suryani</h3>
+    <p>NIM: 60124014</p>
+    <p>Instagram: <a href="https://instagram.com/hiiddda" target="_blank" class="instagram-link">@hiiddda</a></p>
+</div>
+<div class="team-member">
+    <img src="foto2.jpeg" alt="Icha Ayu Anggita" class="profile-img">
+    <h3>Icha Ayu Anggita</h3>
+    <p>NIM: 60124015</p>
+    <p>Instagram: <a href="https://instagram.com/icha.agt" target="_blank" class="instagram-link">@icha.agt</a></p>
+</div>
+<div class="team-member">
+    <div class="profile-img">
+        <i class="fas fa-user-graduate"></i>
+    </div>
+    <h3>Daffa Oktavianuri Ramadhan</h3>
+    <p>NIM: 60124024</p>
+    <p>Instagram: <a href="https://instagram.com/oktavianrzz_" target="_blank" class="instagram-link">@oktavianrzz_</a></p>
+</div>
+<div class="team-member">
+    <div class="profile-img">
+        <i class="fas fa-user-graduate"></i>
+    </div>
+    <h3>Alfico Agra Rashya Valentino</h3>
+    <p>NIM: 60124033</p>
+    <p>Instagram: <a href="https://instagram.com/aarvlntno" target="_blank" class="instagram-link">@aarvlntno</a></p>
+</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Students Data Page -->
+        <section id="students" class="page">
+            <div class="hero">
+                <h2>Data Mahasiswa Sains Data</h2>
+                <p class="tagline">Angkatan 2024 & 2025 - Generasi Pertama Data Scientists</p>
+            </div>
+
+            <div class="section">
+                <h2>Data Mahasiswa Sains Data 2024-2025</h2>
+                
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Cari nama atau NIM...">
+                </div>
+                
+                <div class="tabs">
+                    <div class="tab active" data-tab="2024">📊 Angkatan 2024</div>
+                    <div class="tab" data-tab="2025">📊 Angkatan 2025</div>
+                </div>
+                
+                <div id="tab-2024" class="tab-content active">
+                    <div class="table-container">
+                        <table id="table2024">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Lengkap</th>
+                                    <th>NIM</th>
+                                    <th>Tahun Lahir</th>
+                                    <th>Tempat Asal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Ayun Farichah Khoniaro</td>
+                                    <td>60124001</td>
+                                    <td>2005</td>
+                                    <td>Kota Pekalongan</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Sifa Aurahman</td>
+                                    <td>60124002</td>
+                                    <td>2007</td>
+                                    <td>Kabupaten Pemalang</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Damayanti</td>
+                                    <td>60124003</td>
+                                    <td>2006</td>
+                                    <td>Kabupaten Pemalang</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Yuniar Zahra Wiyani</td>
+                                    <td>60124004</td>
+                                    <td>2006</td>
+                                    <td>Kabupaten Pemalang</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Rina Tisna Nurasih</td>
+                                    <td>60124005</td>
+                                    <td>2006</td>
+                                    <td>Kabupaten Pemalang</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>Nabila Juannita Enas</td>
+                                    <td>60124006</td>
+                                    <td>2006</td>
+                                    <td>Kabupaten Pemalang</td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>Devita Rizqi Maulida</td>
+                                    <td>60124007</td>
+                                    <td>2006</td>
+                                    <td>Kota Pekalongan</td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>Mohammad Rosyiqul Faiq</td>
+                                    <td>60124008</td>
+                                    <td>2006</td>
+                                    <td>Kabupaten Pekalongan</td>
+                                </tr>
+                                <tr>
+                                    <td>9</td>
+                                    <td>Aninda Rizqi Amelia</td>
+                                    <td>60124009</td>
+                                    <td>2006</td>
+                                    <td>Kota Pekalongan</td>
+                                </tr>
+                                <tr>
+                                    <td>10</td>
+                                    <td>Maheswari Pasa Putri S.</td>
+                                    <td>60124010</td>
+                                    <td>2006</td>
+                                    <td>Kabupaten Pekalongan</td>
+                                </tr>
+                                <tr>
+                                    <td>11</td>
+                                    <td>Diandra Nikenita Azalia I.</td>
+                                    <td>60124011</td>
+                                    <td>2006</td>
+                                    <td>Kabupaten Pekalongan</td>
+                                </tr>
+                                <tr>
+                                    <td>12</td>
+                                    <td>Muhammad Rif'an</td>
+                                    <td>60124012</td>
+                                    <td>2006</td>
+                                    <td>Kota Pekalongan</td>
+                                </tr>
+                                <tr>
+                                    <td>13</td>
+                                    <td>Hasan</td>
+                                    <td>60124013</td>
+                                    <td>2007</td>
+                                    <td>Kota Pekalongan</td>
+                                </tr>
+                                <tr>
+                                    <td>14</td>
+                                    <td>Ulum Hidayah Suryani</td>
+                                    <td>60124014</td>
+                                    <td>2006</td>
+                                    <td>Kota Pekalongan</td>
+                                </tr>
+                                <tr>
+                                    <td>15</td>
+                                    <td>Icha Ayu Anggita</td>
+                                    <td>60124015</td>
+                                    <td>2006</td>
+                                    <td>Kabupaten Pekalongan</td>
+                                </tr>
+                                <tr>
+                                    <td>16</td>
+                                    <td>Kaifa Robby</td>
+                                    <td>60124016</td>
+                                    <td>2007</td>
+                                    <td>Kabupaten Pekalongan</td>
+                                </tr>
+                                <tr>
+                                    <td>17</td>
+                                    <td>Nirma Ayu Suryaningtyas</td>
+                                    <td>60124017</td>
+                                    <td>2005</td>
+                                    <td>Kabupaten Pekalongan</td>
+                                </tr>
+                                <tr>
+                                    <td>18</td>
+                                    <td>Khopsa Chanda Syaputri</td>
+                                    <td>60124018</td>
+                                    <td>2005</td>
+                                    <td>Kota Pekalongan</td>
+                                </tr>
+                                <tr>
+                                    <td>19</td>
+                                    <td>Mita Nur Istiyani</td>
+                                    <td>60124019</td>
+                                    <td>2006</td>
+                                    <td>Kota Batang</td>
+                                </tr>
+                                <tr>
+                                    <td>20</td>
+                                    <td>Abdul Muhyi</td>
+                                    <td>60124020</td>
+                                    <td>2006</td>
+                                    <td>Kabupaten Batang</td>
+                                </tr>
+                                <tr>
+                                    <td>21</td>
+                                    <td>Wildan Kharisma Jati</td>
+                                    <td>60124022</td>
+                                    <td>2006</td>
+                                    <td>Kota Pekalongan</td>
+                                </tr>
+                                <tr>
+                                    <td>22</td>
+                                    <td>Sifa Sabrina</td>
+                                    <td>60124023</td>
+                                    <td>2005</td>
+                                    <td>Kabupaten Pekalongan</td>
+                                </tr>
+                                <tr>
+                                    <td>23</td>
+                                    <td>Daffa Oktavianuri Ramadhan</td>
+                                    <td>60124024</td>
+                                    <td>2006</td>
+                                    <td>Kota Pekalongan</td>
+                                </tr>
+                                <tr>
+                                    <td>24</td>
+                                    <td>Muh Dhia Ul Khaq</td>
+                                    <td>60124025</td>
+                                    <td>2005</td>
+                                    <td>Kabupaten Pekalongan</td>
+                                </tr>
+                                <tr>
+                                    <td>25</td>
+                                    <td>Mohamad Royan Ramadhani</td>
+                                    <td>60124026</td>
+                                    <td>2005</td>
+                                    <td>Kota Pekalongan</td>
+                                </tr>
+                                <tr>
+                                    <td>26</td>
+                                    <td>Fitri Amelia</td>
+                                    <td>60124027</td>
+                                    <td>2006</td>
+                                    <td>Kabupaten Batang</td>
+                                </tr>
+                                <tr>
+                                    <td>27</td>
+                                    <td>Abdul Muhis</td>
+                                    <td>60124030</td>
+                                    <td>2007</td>
+                                    <td>Kabupaten Pemalang</td>
+                                </tr>
+                                <tr>
+                                    <td>28</td>
+                                    <td>Devi Mustika</td>
+                                    <td>60124031</td>
+                                    <td>2005</td>
+                                    <td>Kabupaten Pekalongan</td>
+                                </tr>
+                                <tr>
+                                    <td>29</td>
+                                    <td>Rifa Gusti Pradipta</td>
+                                    <td>60124032</td>
+                                    <td>2006</td>
+                                    <td>Kabupaten Batang</td>
+                                </tr>
+                                <tr>
+                                    <td>30</td>
+                                    <td>Alfico Agra Rahsya Valentino</td>
+                                    <td>60124033</td>
+                                    <td>2006</td>
+                                    <td>Kabupaten Batang</td>
+                                </tr>
+                                <tr>
+                                    <td>31</td>
+                                    <td>Azzahra Lailatun Nahdi</td>
+                                    <td>60124035</td>
+                                    <td>2005</td>
+                                    <td>Kabupaten Pekalongan</td>
+                                </tr>
+                                <tr>
+                                    <td>32</td>
+                                    <td>Zidan Reffa Pratama</td>
+                                    <td>60124036</td>
+                                    <td>2007</td>
+                                    <td>Kabupaten Batang</td>
+                                </tr>
+                                <tr>
+                                    <td>33</td>
+                                    <td>Veranda Ardiyan Putra P.</td>
+                                    <td>60124037</td>
+                                    <td>2006</td>
+                                    <td>Kabupaten Pekalongan</td>
+                                </tr>
+                                <tr>
+                                    <td>34</td>
+                                    <td>Mohammad Azrur Rizqi</td>
+                                    <td>60124038</td>
+                                    <td>2005</td>
+                                    <td>Kabupaten Batang</td>
+                                </tr>
+                                <tr>
+                                    <td>35</td>
+                                    <td>Muhammad Syahril Romadhan</td>
+                                    <td>60124039</td>
+                                    <td>2006</td>
+                                    <td>Kabupaten Pemalang</td>
+                                </tr>
+                                <tr>
+                                    <td>36</td>
+                                    <td>Amalia Putri Setya A.</td>
+                                    <td>60124040</td>
+                                    <td>2006</td>
+                                    <td>Kabupaten Pekalongan</td>
+                                </tr>
+                                <tr>
+                                    <td>37</td>
+                                    <td>Selvalentina Rista Anggita</td>
+                                    <td>60124041</td>
+                                    <td>2006</td>
+                                    <td>Kabupaten Pekalongan</td>
+                                </tr>
+                                <tr>
+                                    <td>38</td>
+                                    <td>Nabil Surya Al Hakim</td>
+                                    <td>60124044</td>
+                                    <td>2006</td>
+                                    <td>Kabupaten Batang</td>
+                                </tr>
+                                <tr>
+                                    <td>39</td>
+                                    <td>Lintang Mayzha Safira</td>
+                                    <td>60124045</td>
+                                    <td>2006</td>
+                                    <td>Kabupaten Batang</td>
+                                </tr>
+                                <tr>
+                                    <td>40</td>
+                                    <td>Yusufi Noviati</td>
+                                    <td>60124046</td>
+                                    <td>2007</td>
+                                    <td>Kabupaten Pekalongan</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div id="tab-2025" class="tab-content">
+                    <div class="table-container">
+                        <table id="table2025">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Lengkap</th>
+                                    <th>NIM</th>
+                                    <th>Tahun Lahir</th>
+                                    <th>Tempat Asal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>1</td><td>Muhammad Sheva Nabeel</td><td>60125001</td><td>2007</td><td>Kabupaten Bekasi</td></tr>
+                                <tr><td>2</td><td>Zakaria Ramadhan Al Malik</td><td>60125002</td><td>2006</td><td>Kabupaten Jepara</td></tr>
+                                <tr><td>3</td><td>Tri Indah Dewi Septiani</td><td>60125003</td><td>2007</td><td>Kabupaten Pekalongan</td></tr>
+                                <tr><td>4</td><td>Naelu Rizqiyah</td><td>60125004</td><td>2007</td><td>Kabupaten Pemalang</td></tr>
+                                <tr><td>5</td><td>Putri Mahintan Sari</td><td>60125005</td><td>2007</td><td>Kabupaten Indramayu</td></tr>
+                                <tr><td>6</td><td>Muhamad Rafi Maulana</td><td>60125006</td><td>2007</td><td>Kabupaten Pekalongan</td></tr>
+                                <tr><td>7</td><td>Cahya Putri Jelita</td><td>60125007</td><td>2007</td><td>Kabupaten Pekalongan</td></tr>
+                                <tr><td>8</td><td>Achmad Ridwan</td><td>60125008</td><td>2007</td><td>Kabupaten Pekalongan</td></tr>
+                                <tr><td>9</td><td>Najwa Amalia Khoir</td><td>60125009</td><td>2007</td><td>Kota Pekalongan</td></tr>
+                                <tr><td>10</td><td>Alisha Zulfa Salsabila</td><td>60125010</td><td>2007</td><td>Kabupaten Pemalang</td></tr>
+                                <tr><td>11</td><td>Gisela Anastacia Yasinta Atie</td><td>60125011</td><td>2007</td><td>Kabupaten Pekalongan</td></tr>
+                                <tr><td>12</td><td>Milania Sheva Andini Agustin</td><td>60125012</td><td>2007</td><td>Kabupaten Pemalang</td></tr>
+                                <tr><td>13</td><td>Zaskiyah Sofarina</td><td>60125013</td><td>2007</td><td>Kota Pekalongan</td></tr>
+                                <tr><td>14</td><td>Ahmad Alimin</td><td>60125014</td><td>2006</td><td>Kabupaten Pekalongan</td></tr>
+                                <tr><td>15</td><td>Elgin Pandya Adinata</td><td>60125015</td><td>2007</td><td>Kabupaten Pekalongan</td></tr>
+                                <tr><td>16</td><td>Talitha Falakh Tasya</td><td>60125016</td><td>2007</td><td>Kabupaten Pekalongan</td></tr>
+                                <tr><td>17</td><td>Melda Dwi Susanti</td><td>60125017</td><td>2007</td><td>Kabupaten Pemalang</td></tr>
+                                <tr><td>18</td><td>Farah Amalia</td><td>60125018</td><td>2007</td><td>Kabupaten Pemalang</td></tr>
+                                <tr><td>19</td><td>Muhammad Khoiril Marom</td><td>60125019</td><td>2006</td><td>Kabupaten Pekalongan</td></tr>
+                                <tr><td>20</td><td>Alfiaturrohmaniah</td><td>60125020</td><td>2007</td><td>Kabupaten Pemalang</td></tr>
+                                <tr><td>21</td><td>Thufaila</td><td>60125021</td><td>2006</td><td>Kota Pekalongan</td></tr>
+                                <tr><td>22</td><td>Nur Riskiana</td><td>60125022</td><td>2007</td><td>Kabupaten Pekalongan</td></tr>
+                                <tr><td>23</td><td>Chairul Mustakim</td><td>60125023</td><td>2007</td><td>Kota Pekalongan</td></tr>
+                                <tr><td>24</td><td>Rizki Amalia</td><td>60125024</td><td>2007</td><td>Kabupaten Pemalang</td></tr>
+                                <tr><td>25</td><td>Nafi Maula Arza</td><td>60125025</td><td>2006</td><td>Kabupaten Pekalongan</td></tr>
+                                <tr><td>26</td><td>Dina Nur Vidiana</td><td>60125026</td><td>2006</td><td>Kabupaten Pekalongan</td></tr>
+                                <tr><td>27</td><td>Zahra Khoirunisa</td><td>60125027</td><td>2006</td><td>Kabupaten Pekalongan</td></tr>
+                                <tr><td>28</td><td>Revani Zahra Afifah</td><td>60125028</td><td>2007</td><td>Kabupaten Pekalongan</td></tr>
+                                <tr><td>29</td><td>Lina Azaria</td><td>60125029</td><td>2007</td><td>Kota Pekalongan</td></tr>
+                                <tr><td>30</td><td>Putik Alifamarza</td><td>60125030</td><td>2008</td><td>Kabupaten Pekalongan</td></tr>
+                                <tr><td>31</td><td>Fathiyyatur Rizqi</td><td>60125031</td><td>2007</td><td>Kabupaten Pekalongan</td></tr>
+                                <tr><td>32</td><td>Ahmad Rizza Pahlefi</td><td>60125032</td><td>2007</td><td>Kabupaten Pekalongan</td></tr>
+                                <tr><td>33</td><td>Muhammad Zain</td><td>60125033</td><td>2006</td><td>Nusa Tenggara Timur</td></tr>
+                                <tr><td>34</td><td>M. Syahfatur Dwi Leksono</td><td>60125034</td><td>2006</td><td>Kabupaten Tegal</td></tr>
+                                <tr><td>35</td><td>Ilham Dwijokangko</td><td>60125035</td><td>2007</td><td>Kabupaten Batang</td></tr>
+                                <tr><td>36</td><td>Dara Amalia Azzahrah</td><td>60125036</td><td>2007</td><td>Kota Pekalongan</td></tr>
+                                <tr><td>37</td><td>Ersa Farda Avina</td><td>60125037</td><td>2007</td><td>Kabupaten Pekalongan</td></tr>
+                                <tr><td>38</td><td>Farkhan Yazid Aghniya</td><td>60125038</td><td>2007</td><td>Kabupaten Pemalang</td></tr>
+                                <tr><td>39</td><td>Muhamad Tegar Pamungkas Wira Kusuma</td><td>60125039</td><td>2007</td><td>Kota Pekalongan</td></tr>
+                                <tr><td>40</td><td>Shafa Azzahra</td><td>60125040</td><td>2007</td><td>Kabupaten Pekalongan</td></tr>
+                                <tr><td>41</td><td>Rama Putra Tama</td><td>60125041</td><td>2007</td><td>Kabupaten Pekalongan</td></tr>
+                                <tr><td>42</td><td>Na'illatul Nabila</td><td>60125042</td><td>2007</td><td>Kabupaten Pekalongan</td></tr>
+                                <tr><td>43</td><td>Nova Aghnia Zahra</td><td>60125043</td><td>2006</td><td>Kota Pekalongan</td></tr>
+                                <tr><td>44</td><td>Dylan Permana Putra</td><td>60125044</td><td>2005</td><td>Kota Pekalongan</td></tr>
+                                <tr><td>45</td><td>Devon Zubair Helnanto Putra</td><td>60125045</td><td>2007</td><td>Kabupaten Pemalang</td></tr>
+                                <tr><td>46</td><td>Andhi Ahmat Tauhit</td><td>60125046</td><td>2007</td><td>Kabupaten Pekalongan</td></tr>
+                                <tr><td>47</td><td>Muhamad Rafi Pradana</td><td>60125047</td><td>2007</td><td>v Pemalang</td></tr>
+                                <tr><td>48</td><td>Ayyub Al Idrus</td><td>60125048</td><td>2007</td><td>Kabupaten Pekalongan</td></tr>
+                                <tr><td>49</td><td>Fika Zulfiani</td><td>60125049</td><td>2007</td><td>Kabupaten Pemalang</td></tr>
+                                <tr><td>50</td><td>Bintan Kamila</td><td>60125050</td><td>2007</td><td>Kota Pekalongan</td></tr>
+                                <tr><td>51</td><td>Naila Athaya Ahmad</td><td>60125051</td><td>2006</td><td>Kota Pekalongan</td></tr>
+                                <tr><td>52</td><td>Fildzah Izzati</td><td>60125052</td><td>2007</td><td>Kabupaten Pekalongan</td></tr>
+                                <tr><td>53</td><td>M. Abyan Nuha</td><td>60125053</td><td>2006</td><td>Kota Pekalongan</td></tr>
+                                <tr><td>54</td><td>Harun Ibrahim Abdallah Mohammad</td><td>60125054</td><td>2004</td><td>Saudi Arabia</td></tr>
+                                <tr><td>55</td><td>Aliyu Ibrahim Ahmad</td><td>60125055</td><td>2005</td><td>Kano</td></tr>
+                                <tr><td>56</td><td>Muhammad Jihadil Barran</td><td>60125056</td><td>2007</td><td>Kabupaten Batang</td></tr>
+                                <tr><td>57</td><td>Anas Royan Samudra</td><td>60125057</td><td>2007</td><td>Kabupaten Pekalongan</td></tr>
+                                <tr><td>58</td><td>Achmad Pauzan</td><td>60125058</td><td>2007</td><td>Kabupaten Cirebon</td></tr>
+                                <tr><td>59</td><td>Atha Harshavardhana</td><td>60125059</td><td>2007</td><td>Kota Pekalongan</td></tr>
+                                <tr><td>60</td><td>Muhammad Ilham Farid</td><td>60125060</td><td>2007</td><td>Kabupaten Pekalongan</td></tr>
+                                <tr><td>61</td><td>Muhammad Efendi</td><td>60125061</td><td>2004</td><td>Kabupaten Pemalang</td></tr>
+                                <tr><td>62</td><td>Nukman Zadi</td><td>60125062</td><td>2007</td><td>Kota Pekalongan</td></tr>
+                                <tr><td>63</td><td>Mohamad Farrel Chizam</td><td>60125063</td><td>2007</td><td>Kabupaten Pekalongan</td></tr>
+                                <tr><td>64</td><td>Tri Marines Cristanti</td><td>60125064</td><td>2005</td><td>Kabupaten Pekalongan</td></tr>
+                                <tr><td>65</td><td>Elsa Elysia</td><td>60125065</td><td>2006</td><td>Kabupaten Pekalongan</td></tr>
+                                <tr><td>66</td><td>Yunita Rozana Falah</td><td>60125066</td><td>2004</td><td>Kabupaten Pekalongan</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dosen Page -->
+        <section id="dosen" class="page">
+            <div class="hero">
+                <h2>Pengabdian Dosen Sains Data</h2>
+                <p class="tagline">Berkontribusi untuk Masyarakat melalui Ilmu Data</p>
+            </div>
+            <!-- Konten akan ditambahkan nanti -->
+        </section>
+
+        <!-- Informasi Program Studi Page -->
+        <section id="info-prodi" class="page">
+            <div class="hero">
+                <h2>Informasi Program Studi</h2>
+                <p class="tagline">Informasi Lengkap Program Studi Sains Data</p>
+            </div>
+
+            <div class="section">
+                <h2>Informasi Program Studi</h2>
+                
+                <div class="two-column-layout">
+                    <!-- Kolom 1: Informasi Kontak -->
+                    <div class="info-column">
+                        <h3><i class="fas fa-address-card"></i> Informasi Kontak</h3>
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <h4>Email</h4>
+                                <p><a href="mailto:Sains.data@uingusdur.ac.id">Sains.data@uingusdur.ac.id</a></p>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <i class="fab fa-instagram"></i>
+                                <h4>Instagram</h4>
+                                <p><a href="https://instagram.com/sainsdata_uingusdur" target="_blank">@sainsdata_uingusdur</a></p>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <h4>Alamat</h4>
+                                <p>Kampus 1<br>Jl. Kusuma Bangsa No.9, Panjang Baru, Kec. Pekalongan Utara,<br>Kota Pekalongan, Jawa Tengah 51141</p>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <h4>Alamat</h4>
+                                <p>Kampus 2<br>Jl. Pahlawan Km.5 Rowolaku Kajen<br>Kab. Pekalongan, Jawa Tengah 51161</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kolom 2: Informasi Akademik -->
+                    <div class="info-column">
+                        <h3><i class="fas fa-graduation-cap"></i> Informasi Akademik</h3>
+                        <ul class="academic-list">
+                            <li>
+                                <strong>Program Studi:</strong><br>
+                                Sains Data
+                            </li>
+                            <li>
+                                <strong>Fakultas:</strong><br>
+                                Ekonomi dan Bisnis Islam
+                            </li>
+                            <li>
+                                <strong>Jenjang:</strong><br>
+                                Strata 1 (S1)
+                            </li>
+                            <li>
+                                <strong>Akreditasi:</strong><br>
+                                Terakreditasi B
+                            </li>
+                            <li>
+                                <strong>Masa Studi:</strong><br>
+                                4 Tahun (8 Semester)
+                            </li>
+                            <li>
+                                <strong>Gelar:</strong><br>
+                                Sarjana Sains (S.Si.D)
+                            </li>
+                            <li>
+                                <strong>Jumlah SKS:</strong><br>
+                                144 SKS
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kegiatan Mahasiswa Page -->
+        <section id="info-kegiatan" class="page">
+            <div class="hero">
+                <h2>Kegiatan Mahasiswa</h2>
+                <p class="tagline">Berbagai Kegiatan dan Prestasi Mahasiswa Sains Data</p>
+            </div>
+
+            <div class="section">
+                <h2>Kegiatan Mahasiswa Sains Data</h2>
+                
+                <div class="two-column-layout">
+                    <!-- Kolom 1: Organisasi dan Unit Kegiatan -->
+                    <div class="info-column">
+                        <h3><i class="fas fa-users"></i> Organisasi dan Kegiatan</h3>
+                        <div class="academic-list">
+                            <li>
+                                <strong>Organisasi Intra Mahasiswa</strong><br>
+                                Wadah bagi mahasiswa untuk mengembangkan kemampuan organisasi dan kepemimpinan
+                            </li>
+                            <li>
+                                <strong>Unit Kegiatan Mahasiswa</strong><br>
+                                Berbagai UKM yang dapat diikuti mahasiswa Sains Data sesuai minat dan bakat
+                            </li>
+                            <li>
+                                <strong>Prestasi Mahasiswa</strong><br>
+                                Berbagai prestasi yang telah diraih mahasiswa Sains Data di tingkat regional dan nasional
+                            </li>
+                        </div>
+                    </div>
+
+                    <!-- Kolom 2: Penerimaan Mahasiswa -->
+                    <div class="info-column">
+                        <h3><i class="fas fa-user-graduate"></i> Penerimaan Mahasiswa</h3>
+                        <div class="academic-list">
+                            <li>
+                                <strong>Penerimaan Mahasiswa Baru</strong><br>
+                                Informasi lengkap mengenai jalur masuk dan persyaratan pendaftaran
+                            </li>
+                            <li>
+                                <strong>Dokumen Pendaftaran</strong><br>
+                                Persyaratan dokumen yang diperlukan untuk mendaftar Program Studi Sains Data
+                            </li>
+                            <li>
+                                <strong>Beasiswa</strong><br>
+                                Informasi mengenai berbagai program beasiswa yang tersedia untuk mahasiswa
+                            </li>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; 2025 Program Studi Sains Data - UIN KH Abdurrahman Wahid Pekalongan</p>
+           <div class="social-links">
+    <a href="https://instagram.com/sainsdata_uingusdur" target="_blank" title="Instagram Sains Data">
+        <i class="fab fa-instagram"></i>
+    </a>
+    <a href="https://youtube.com/@SainsDataUINGusdurPekalongan
+" target="_blank" title="YouTube Sains Data">
+        <i class="fab fa-youtube"></i>
+    </a>
+</div>
+            <p>Website dibuat oleh Tim Mahasiswa Sains Data Angkatan 2024</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pages = document.querySelectorAll('.page');
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('navMenu');
+            const infoDropdown = document.getElementById('infoDropdown');
+            const infoDropdownMenu = document.getElementById('infoDropdownMenu');
+            
+            // Hamburger menu toggle
+            hamburger.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+            });
+            
+            // Info dropdown toggle
+            infoDropdown.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (window.innerWidth <= 768) {
+                    infoDropdownMenu.classList.toggle('active');
+                }
+            });
+            
+            // Navigation between pages
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all links and pages
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    pages.forEach(page => page.classList.remove('active'));
+                    
+                    // Add active class to clicked link and corresponding page
+                    this.classList.add('active');
+                    const pageId = this.getAttribute('data-page');
+                    document.getElementById(pageId).classList.add('active');
+                    
+                    // Close mobile menu after clicking a link
+                    if (window.innerWidth <= 768) {
+                        navMenu.classList.remove('active');
+                        infoDropdownMenu.classList.remove('active');
+                    }
+                });
+            });
+
+            // Tab functionality for student data
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // Remove active class from all tabs and tab contents
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Add active class to clicked tab and corresponding content
+                    this.classList.add('active');
+                    document.getElementById(`tab-${tabId}`).classList.add('active');
+                });
+            });
+
+            // Search functionality
+            const searchInput = document.getElementById('searchInput');
+            
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const activeTab = document.querySelector('.tab.active').getAttribute('data-tab');
+                const table = document.getElementById(`table${activeTab}`);
+                const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+                
+                for (let row of rows) {
+                    const cells = row.getElementsByTagName('td');
+                    let found = false;
+                    
+                    for (let cell of cells) {
+                        if (cell.textContent.toLowerCase().includes(searchTerm)) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    
+                    row.style.display = found ? '' : 'none';
+                }
+            });
+            
+            // Close menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('nav') && window.innerWidth <= 768) {
+                    navMenu.classList.remove('active');
+                    infoDropdownMenu.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
